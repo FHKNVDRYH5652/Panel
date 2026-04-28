@@ -1,0 +1,1633 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MICKEY HACK PREMIUM V2</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --premium-gold: #FFD700;
+            --neon-blue: #00d4ff;
+            --neon-purple: #9b59ff;
+            --neon-violet: #7c3aed;
+            --panel-bg: #0a0614;
+            --panel-border: rgba(124, 58, 237, 0.6);
+            --green-glow: #00ff88;
+            --red-color: #ff4d6d;
+            --dark-surface: #0d0a1f;
+            --card-bg: rgba(15, 10, 35, 0.95);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        body,
+        html {
+            height: 100%;
+            width: 100%;
+            background: #000;
+            overflow: hidden;
+            color: white;
+        }
+
+        /* ===== ENTRY SCREEN ===== */
+        #entry-screen {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url('shak.png') no-repeat center center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .premium-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 32px;
+            font-weight: 900;
+            color: #fff;
+            text-shadow: 0 0 15px var(--neon-purple);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .main-btn {
+            margin-top: 30px;
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(45deg, #FF416C, #FF4B2B);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(255, 65, 108, 0.5);
+            font-family: 'Orbitron', sans-serif;
+            transition: 0.3s;
+        }
+
+        .main-btn:hover {
+            box-shadow: 0 0 30px rgba(255, 65, 108, 0.8);
+            transform: scale(1.03);
+        }
+
+        /* ===== FLOATING CIRCLE ===== */
+        #floating-circle {
+            display: none;
+            position: fixed;
+            top: 70%;
+            right: 20px;
+            width: 65px;
+            height: 65px;
+            z-index: 10000;
+            cursor: move;
+            touch-action: none;
+            border-radius: 50%;
+            background: url('flot.png') no-repeat center center/cover;
+            border: 2px solid var(--neon-blue);
+            box-shadow: 0 0 18px rgba(0, 212, 255, 0.7), 0 0 35px rgba(0, 212, 255, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: floatPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes floatPulse {
+            0%,
+            100% {
+                box-shadow: 0 0 18px rgba(0, 212, 255, 0.7), 0 0 35px rgba(0, 212, 255, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 25px rgba(0, 212, 255, 1), 0 0 50px rgba(0, 212, 255, 0.5);
+            }
+        }
+
+        /* ===== MAIN PANEL BOX - WINGO STYLE ===== */
+        .panel-box {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 370px;
+            max-height: 90vh;
+            overflow-y: auto;
+            background: linear-gradient(160deg, #100c22 0%, #0b0718 40%, #080412 100%);
+            border: 1px solid rgba(140, 70, 255, 0.65);
+            border-radius: 20px;
+            z-index: 10001;
+            box-shadow: 0 0 0 1px rgba(140, 70, 255, 0.25),
+                0 0 40px rgba(124, 58, 237, 0.55),
+                0 0 80px rgba(124, 58, 237, 0.2),
+                0 0 120px rgba(80, 0, 200, 0.1),
+                inset 0 1px 0 rgba(200, 150, 255, 0.35),
+                inset 0 -1px 0 rgba(124, 58, 237, 0.2);
+        }
+
+        .panel-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent 0%, #5500cc 20%, #9b59ff 40%, #00d4ff 50%, #9b59ff 60%, #5500cc 80%, transparent 100%);
+            animation: scanLine 2.5s ease-in-out infinite;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .panel-box::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 180px;
+            height: 180px;
+            background: radial-gradient(ellipse at top left, rgba(155, 89, 255, 0.12), transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes scanLine {
+            0%,
+            100% {
+                opacity: 0.5;
+                background-position: -100% 0;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* ===== PANEL HEADER ===== */
+        .panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 16px 11px 16px;
+            background: linear-gradient(180deg, rgba(140, 70, 255, 0.18) 0%, transparent 100%);
+            border-bottom: 1px solid rgba(140, 70, 255, 0.25);
+            position: relative;
+            z-index: 1;
+        }
+
+        .panel-header-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .header-icon {
+            width: 32px;
+            height: 32px;
+            background: radial-gradient(circle at 35% 35%, #c084fc, #7c3aed);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 14px rgba(155, 89, 255, 0.9), 0 0 28px rgba(124, 58, 237, 0.4);
+            font-size: 15px;
+            border: 1px solid rgba(200, 150, 255, 0.4);
+        }
+
+        .panel-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 14px;
+            font-weight: 900;
+            color: #fff;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(200, 150, 255, 0.4);
+        }
+
+        .panel-subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 9px;
+            font-weight: 400;
+            color: #9b59ff;
+            letter-spacing: 3px;
+            margin-left: 4px;
+        }
+
+        .panel-controls {
+            display: flex;
+            gap: 6px;
+        }
+        .ctrl-btn {
+            width: 22px;
+            height: 22px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.05);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .ctrl-btn:hover {
+            background: rgba(124, 58, 237, 0.3);
+            color: white;
+        }
+
+        /* ===== PERIOD ROW ===== */
+        .period-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 9px 16px;
+            background: rgba(0, 0, 0, 0.35);
+            border-bottom: 1px solid rgba(140, 70, 255, 0.18);
+            position: relative;
+            z-index: 1;
+        }
+
+        .period-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .period-icon {
+            color: #9b59ff;
+            font-size: 13px;
+        }
+        .period-label {
+            font-family: 'Rajdhani', sans-serif;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 11px;
+            letter-spacing: 1px;
+        }
+        .period-value {
+            font-family: 'Orbitron', sans-serif;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .time-remaining {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .time-icon {
+            color: #9b59ff;
+            font-size: 12px;
+        }
+        .time-value {
+            font-family: 'Orbitron', sans-serif;
+            color: #9b59ff;
+            font-size: 18px;
+            font-weight: 900;
+            text-shadow: 0 0 12px rgba(155, 89, 255, 0.7);
+        }
+
+        /* ===== UID VERIFICATION SECTION ===== */
+        #uid-section {
+            display: none;
+            padding: 18px 16px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .uid-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 2px;
+            margin-bottom: 6px;
+            text-shadow: 0 0 8px rgba(155, 89, 255, 0.5);
+        }
+
+        .uid-subtitle {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.45);
+            margin-bottom: 14px;
+            letter-spacing: 1px;
+        }
+
+        .uid-input-row {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .uid-input {
+            flex: 1;
+            min-width: 140px;
+            padding: 11px 14px;
+            background: rgba(15, 10, 35, 0.9);
+            border: 1.5px solid rgba(140, 70, 255, 0.5);
+            border-radius: 10px;
+            color: #fff;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 16px;
+            letter-spacing: 2px;
+            text-align: center;
+            outline: none;
+            transition: 0.3s;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .uid-input:focus {
+            border-color: #9b59ff;
+            box-shadow: 0 0 15px rgba(155, 89, 255, 0.4), inset 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .uid-input::placeholder {
+            color: rgba(255, 255, 255, 0.25);
+            letter-spacing: 1px;
+            font-size: 12px;
+        }
+
+        .uid-confirm-btn {
+            padding: 11px 22px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            color: #fff;
+            background: linear-gradient(135deg, #7c3aed, #9b59ff);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            letter-spacing: 1px;
+            box-shadow: 0 0 15px rgba(124, 58, 237, 0.5);
+            transition: 0.3s;
+            white-space: nowrap;
+        }
+
+        .uid-confirm-btn:hover {
+            box-shadow: 0 0 22px rgba(155, 89, 255, 0.75);
+            transform: scale(1.03);
+        }
+
+        .uid-confirm-btn:active {
+            transform: scale(0.96);
+        }
+
+        .uid-error-msg {
+            display: none;
+            margin-top: 14px;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: #ff6b7a;
+            letter-spacing: 1px;
+            text-shadow: 0 0 8px rgba(255, 77, 109, 0.5);
+            animation: shakeError 0.5s ease;
+        }
+
+        @keyframes shakeError {
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+            20% {
+                transform: translateX(-6px);
+            }
+            40% {
+                transform: translateX(6px);
+            }
+            60% {
+                transform: translateX(-4px);
+            }
+            80% {
+                transform: translateX(4px);
+            }
+        }
+
+        /* Green Register Button */
+        .register-btn-wrap {
+            display: none;
+            margin-top: 12px;
+        }
+
+        .register-btn {
+            display: inline-block;
+            padding: 13px 30px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 14px;
+            font-weight: 800;
+            color: #fff;
+            background: linear-gradient(135deg, #00c853, #00e676, #69f0ae);
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            letter-spacing: 2px;
+            text-decoration: none;
+            box-shadow: 0 0 20px rgba(0, 200, 83, 0.6), 0 0 40px rgba(0, 230, 118, 0.35), 0 4px 15px rgba(0, 0, 0, 0.5);
+            animation: registerGlow 2s ease-in-out infinite;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .register-btn::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 60%);
+            animation: shimmer 2s ease-in-out infinite;
+        }
+
+        @keyframes registerGlow {
+            0%,
+            100% {
+                box-shadow: 0 0 20px rgba(0, 200, 83, 0.6), 0 0 40px rgba(0, 230, 118, 0.35), 0 4px 15px rgba(0, 0, 0, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 30px rgba(0, 255, 136, 0.9), 0 0 55px rgba(0, 230, 118, 0.55), 0 6px 20px rgba(0, 0, 0, 0.6);
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .register-btn:hover {
+            transform: scale(1.06);
+            box-shadow: 0 0 35px rgba(0, 255, 136, 1), 0 0 60px rgba(0, 230, 118, 0.6), 0 6px 22px rgba(0, 0, 0, 0.6);
+            color: #fff;
+        }
+
+        .register-btn:active {
+            transform: scale(0.95);
+        }
+
+        .register-btn-icon {
+            margin-right: 6px;
+            font-size: 16px;
+        }
+
+        /* ===== PREDICTION CONTENT WRAPPER ===== */
+        #prediction-content {
+            display: none;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== PREDICTION AREA ===== */
+        .prediction-area {
+            display: flex;
+            align-items: stretch;
+            padding: 12px 14px;
+            gap: 10px;
+            min-height: 110px;
+            position: relative;
+        }
+
+        .prediction-left {
+            flex: 0 0 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .number-orb {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: radial-gradient(circle at 40% 35%, rgba(255, 255, 255, 0.1), transparent 60%),
+                radial-gradient(circle, #0a3020, #000);
+            border: 2px solid rgba(0, 255, 136, 0.3);
+        }
+
+        .number-orb.green-orb {
+            background: radial-gradient(circle at 38% 32%, rgba(0, 255, 136, 0.22) 0%, rgba(0, 200, 100, 0.08) 40%, transparent 70%),
+                radial-gradient(circle, #0a2a15, #020a05);
+            border-color: rgba(0, 255, 136, 0.6);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.5),
+                0 0 45px rgba(0, 255, 136, 0.25),
+                0 0 70px rgba(0, 200, 100, 0.1),
+                inset 0 0 25px rgba(0, 255, 136, 0.1);
+        }
+
+        .number-orb.red-orb {
+            background: radial-gradient(circle at 38% 32%, rgba(255, 77, 109, 0.22) 0%, rgba(200, 50, 80, 0.08) 40%, transparent 70%),
+                radial-gradient(circle, #2a0a10, #050002);
+            border-color: rgba(255, 77, 109, 0.6);
+            box-shadow: 0 0 20px rgba(255, 77, 109, 0.5),
+                0 0 45px rgba(255, 77, 109, 0.25),
+                0 0 70px rgba(200, 50, 80, 0.1),
+                inset 0 0 25px rgba(255, 77, 109, 0.1);
+        }
+
+        .orb-ring {
+            position: absolute;
+            top: -6px;
+            left: -6px;
+            right: -6px;
+            bottom: -6px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            border-top-color: #00ff88;
+            border-right-color: rgba(0, 255, 136, 0.3);
+            animation: orbSpin 3s linear infinite;
+        }
+        .orb-ring.red-ring {
+            border-top-color: #ff4d6d;
+            border-right-color: rgba(255, 77, 109, 0.3);
+        }
+
+        .orb-ring2 {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border-radius: 50%;
+            border: 1px solid transparent;
+            border-bottom-color: rgba(0, 255, 136, 0.5);
+            border-left-color: rgba(0, 212, 255, 0.3);
+            animation: orbSpin 5s linear infinite reverse;
+        }
+
+        @keyframes orbSpin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .orb-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 38px;
+            font-weight: 900;
+            color: #fff;
+            text-shadow: 0 0 15px rgba(0, 255, 136, 1), 0 0 35px rgba(0, 255, 136, 0.6), 0 0 60px rgba(0, 255, 136, 0.3);
+            z-index: 1;
+        }
+        .orb-number.red-num {
+            text-shadow: 0 0 15px rgba(255, 77, 109, 1), 0 0 35px rgba(255, 77, 109, 0.6), 0 0 60px rgba(255, 77, 109, 0.3);
+        }
+
+        .prediction-right {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .pred-label {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 3px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .pred-label::before,
+        .pred-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .pred-size {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 32px;
+            font-weight: 900;
+            color: #00ff88;
+            text-shadow: 0 0 20px rgba(0, 255, 136, 0.8), 0 0 40px rgba(0, 255, 136, 0.4);
+            line-height: 1;
+        }
+        .pred-size.red-size {
+            color: #ff4d6d;
+            text-shadow: 0 0 20px rgba(255, 77, 109, 0.8), 0 0 40px rgba(255, 77, 109, 0.4);
+        }
+
+        .pred-color-badge {
+            display: inline-block;
+            padding: 5px 18px;
+            border-radius: 7px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 13px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #00a854, #00ff88);
+            color: #000;
+            letter-spacing: 2px;
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.5), 0 2px 8px rgba(0, 0, 0, 0.4);
+            width: fit-content;
+        }
+        .pred-color-badge.red-badge {
+            background: linear-gradient(135deg, #c0213a, #ff4d6d);
+            color: #fff;
+            box-shadow: 0 0 12px rgba(255, 77, 109, 0.4);
+        }
+
+        .anime-slot {
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 90px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        .anime-slot img {
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 0 8px rgba(124, 58, 237, 0.6));
+        }
+
+        /* ===== DIVIDER ===== */
+        .panel-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(124, 58, 237, 0.4), transparent);
+            margin: 0 14px;
+        }
+
+        /* ===== TWO-COL BODY ===== */
+        .panel-body {
+            display: flex;
+            gap: 9px;
+            padding: 11px 14px;
+        }
+
+        .recent-col {
+            flex: 1;
+            background: linear-gradient(145deg, rgba(20, 10, 45, 0.95), rgba(10, 5, 25, 0.95));
+            border-radius: 12px;
+            padding: 9px;
+            border: 1px solid rgba(140, 70, 255, 0.22);
+            box-shadow: inset 0 1px 0 rgba(200, 150, 255, 0.08), 0 2px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        .col-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.6);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 7px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .col-title i {
+            color: var(--neon-purple);
+            font-size: 11px;
+        }
+
+        .history-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 3px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+        .history-row:last-child {
+            border-bottom: none;
+        }
+
+        .hist-period {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 7px;
+            color: rgba(255, 255, 255, 0.35);
+            letter-spacing: 0;
+        }
+
+        .hist-num-badge {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 9px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .num-green {
+            background: #1a7a40;
+            color: #00ff88;
+            box-shadow: 0 0 5px rgba(0, 255, 136, 0.4);
+        }
+        .num-red {
+            background: #7a1a2a;
+            color: #ff4d6d;
+            box-shadow: 0 0 5px rgba(255, 77, 109, 0.4);
+        }
+        .num-purple {
+            background: #3a1a7a;
+            color: #9b59ff;
+            box-shadow: 0 0 5px rgba(155, 89, 255, 0.4);
+        }
+
+        .hist-result {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        .result-small {
+            color: var(--neon-purple);
+        }
+        .result-big {
+            color: #00d4ff;
+        }
+
+        .hist-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .dot-green {
+            background: #00ff88;
+            box-shadow: 0 0 4px #00ff88;
+        }
+        .dot-red {
+            background: #ff4d6d;
+            box-shadow: 0 0 4px #ff4d6d;
+        }
+
+        .stats-col {
+            width: 115px;
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .stat-card {
+            background: linear-gradient(145deg, rgba(20, 10, 45, 0.95), rgba(10, 5, 25, 0.95));
+            border-radius: 12px;
+            padding: 9px;
+            border: 1px solid rgba(140, 70, 255, 0.22);
+            box-shadow: inset 0 1px 0 rgba(200, 150, 255, 0.08), 0 2px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        .stat-card-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 10px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .stat-icon {
+            width: 14px;
+            height: 14px;
+            object-fit: contain;
+        }
+
+        .streak-ring-wrap {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .donut-wrap {
+            position: relative;
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+        }
+        .donut-svg {
+            width: 40px;
+            height: 40px;
+            transform: rotate(-90deg);
+        }
+        .donut-track {
+            fill: none;
+            stroke: rgba(255, 77, 109, 0.3);
+            stroke-width: 4;
+        }
+        .donut-fill-green {
+            fill: none;
+            stroke: #00ff88;
+            stroke-width: 4;
+            stroke-linecap: round;
+            stroke-dasharray: 88;
+            stroke-dashoffset: 35;
+            filter: drop-shadow(0 0 3px #00ff88);
+        }
+
+        .streak-labels {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .streak-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .streak-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+        }
+        .sdot-g {
+            background: #00ff88;
+        }
+        .sdot-r {
+            background: #ff4d6d;
+        }
+        .streak-text {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .streak-pct {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 10px;
+            font-weight: 700;
+        }
+        .pct-g {
+            color: #00ff88;
+        }
+        .pct-r {
+            color: #ff4d6d;
+        }
+
+        .accuracy-val {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 20px;
+            font-weight: 900;
+            color: var(--neon-blue);
+            text-shadow: 0 0 15px rgba(0, 212, 255, 0.9), 0 0 30px rgba(0, 212, 255, 0.4);
+        }
+
+        .mini-graph {
+            width: 100%;
+            height: 28px;
+            margin-top: 3px;
+        }
+        .mini-graph svg {
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+        }
+
+        /* ===== AI INSIGHTS ===== */
+        .insights-section {
+            padding: 0 14px 10px 14px;
+        }
+
+        .insights-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 2px;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .insights-title i {
+            color: var(--neon-purple);
+        }
+
+        .insights-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 5px;
+        }
+
+        .insight-box {
+            background: linear-gradient(145deg, rgba(20, 10, 45, 0.95), rgba(10, 5, 25, 0.95));
+            border-radius: 10px;
+            padding: 9px 5px;
+            border: 1px solid rgba(140, 70, 255, 0.25);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            box-shadow: inset 0 1px 0 rgba(200, 150, 255, 0.1), 0 2px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        .insight-icon {
+            width: 22px;
+            height: 22px;
+            object-fit: contain;
+        }
+        .insight-label {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.45);
+            letter-spacing: 1px;
+        }
+        .insight-val {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 11px;
+            font-weight: 900;
+        }
+        .ival-big {
+            color: var(--neon-purple);
+            text-shadow: 0 0 8px rgba(155, 89, 255, 0.6);
+        }
+        .ival-low {
+            color: #00ff88;
+            text-shadow: 0 0 8px rgba(0, 255, 136, 0.6);
+        }
+
+        /* ===== BOTTOM STATUS BAR ===== */
+        .status-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 16px;
+            border-top: 1px solid rgba(140, 70, 255, 0.2);
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.2), rgba(20, 5, 50, 0.5));
+        }
+        .status-left {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+        .ai-badge {
+            width: 22px;
+            height: 22px;
+            background: linear-gradient(135deg, #c084fc, #7c3aed);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 9px;
+            font-weight: 900;
+            font-family: 'Orbitron', sans-serif;
+            box-shadow: 0 0 10px rgba(155, 89, 255, 0.8), 0 0 20px rgba(124, 58, 237, 0.4);
+            border: 1px solid rgba(200, 150, 255, 0.4);
+        }
+        .status-text {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.4);
+            letter-spacing: 1px;
+        }
+        .live-dot {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .live-indicator {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #00ff88;
+            box-shadow: 0 0 8px #00ff88, 0 0 14px rgba(0, 255, 136, 0.5);
+            animation: blink 1.5s ease infinite;
+        }
+        @keyframes blink {
+            0%,
+            100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.3;
+            }
+        }
+        .live-text {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.45);
+        }
+
+        /* ===== GAME FRAME ===== */
+        #game-frame {
+            display: none;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* ===== PAYMENT BOX ===== */
+        #payment-box {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 340px;
+            background: #111;
+            border: 2px solid gold;
+            z-index: 10005;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+        }
+        .qr-img {
+            width: 200px;
+            height: 200px;
+            margin: 15px 0;
+            border: 3px solid #fff;
+        }
+        .loading-overlay {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="entry-screen">
+        <div class="premium-title">MICKEY ADVANCE</div>
+        <p style="color: cyan; font-size: 12px; margin-top: 5px; font-family: 'Orbitron', sans-serif;">PREMIUM V2.0 SYSTEM</p>
+        <button class="main-btn" onclick="startApp()">LOGIN & ACTIVATE</button>
+    </div>
+
+    <iframe id="game-frame" src=""></iframe>
+
+    <div id="floating-circle">
+        <i class="fas fa-bolt" style="color: cyan; font-size: 22px;"></i>
+    </div>
+
+    <!-- ===== ADVANCED PREDICTION PANEL ===== -->
+    <div id="mickey-panel" class="panel-box">
+
+        <!-- Header -->
+        <div class="panel-header">
+            <div class="panel-header-left">
+                <div class="header-icon">✦</div>
+                <div>
+                    <span class="panel-title">WINGO 1 MIN</span>
+                    <span class="panel-subtitle">PREDICTION PANEL</span>
+                </div>
+            </div>
+            <div class="panel-controls">
+                <button class="ctrl-btn">📌</button>
+                <button class="ctrl-btn">—</button>
+                <button class="ctrl-btn" onclick="toggleMickeyPanel()">✕</button>
+            </div>
+        </div>
+
+        <!-- Period + Timer (always visible) -->
+        <div class="period-row">
+            <div class="period-left">
+                <i class="fas fa-calendar-alt period-icon"></i>
+                <div>
+                    <div class="period-label">NEXT PERIOD</div>
+                    <div class="period-value" id="game-period-id">LOADING...</div>
+                </div>
+            </div>
+            <div class="time-remaining">
+                <i class="fas fa-clock time-icon"></i>
+                <div class="time-value" id="timer-display">00:45</div>
+            </div>
+        </div>
+
+        <!-- ===== UID VERIFICATION SECTION ===== -->
+        <div id="uid-section">
+            <div class="uid-title">🔐 ENTER YOUR UID</div>
+            <div class="uid-subtitle">Please enter your registered UID to activate</div>
+            <div class="uid-input-row">
+                <input type="text" id="uid-input" class="uid-input" inputmode="numeric" placeholder="Enter UID..." maxlength="20" autocomplete="off">
+                <button class="uid-confirm-btn" onclick="verifyUID()">CONFIRM</button>
+            </div>
+            <div class="uid-error-msg" id="uid-error-msg">
+                ⚠️ This UID is Not Registered
+            </div>
+            <div class="register-btn-wrap" id="register-btn-wrap">
+                <a href="https://t.me/Predict456" target="_blank" class="register-btn" rel="noopener noreferrer">
+                    <span class="register-btn-icon">📝</span> REGISTER BUT NOT OPEN
+                </a>
+            </div>
+        </div>
+
+        <!-- ===== PREDICTION CONTENT (visible after UID verification) ===== -->
+        <div id="prediction-content">
+
+            <!-- Prediction Display -->
+            <div class="prediction-area" id="prediction-area">
+                <div class="prediction-left">
+                    <div class="number-orb green-orb" id="number-orb">
+                        <div class="orb-ring" id="orb-ring"></div>
+                        <div class="orb-ring2" id="orb-ring2"></div>
+                        <span class="orb-number" id="pred-number">?</span>
+                    </div>
+                </div>
+
+                <div class="prediction-right">
+                    <div class="pred-label">NEXT PREDICTION</div>
+                    <div class="pred-size" id="pred-size">—</div>
+                    <div class="pred-color-badge" id="pred-color-badge">—</div>
+                </div>
+
+                <div class="anime-slot">
+                    <img src="123.png" alt="" onerror="this.style.display='none'">
+                </div>
+            </div>
+
+            <div class="panel-divider"></div>
+
+            <!-- Body: Recent History + Stats -->
+            <div class="panel-body">
+                <div class="recent-col">
+                    <div class="col-title"><i class="fas fa-chart-bar"></i> RECENT HISTORY</div>
+                    <div id="history-list">
+                        <div class="history-row">
+                            <span class="hist-period">—</span>
+                            <span class="hist-num-badge num-green">—</span>
+                            <span class="hist-result result-small">—</span>
+                            <span class="hist-dot dot-green"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stats-col">
+                    <div class="stat-card">
+                        <div class="stat-card-title">
+                            <img src="fire.png" class="stat-icon" onerror="this.outerHTML='🔥'"> HOT STREAK
+                        </div>
+                        <div class="streak-ring-wrap">
+                            <div class="donut-wrap">
+                                <svg class="donut-svg" viewBox="0 0 40 40">
+                                    <circle class="donut-track" cx="20" cy="20" r="14"/>
+                                    <circle class="donut-fill-green" cx="20" cy="20" r="14" id="streak-arc"/>
+                                </svg>
+                            </div>
+                            <div class="streak-labels">
+                                <div class="streak-item">
+                                    <div class="streak-dot sdot-g"></div>
+                                    <span class="streak-text">BIG</span>
+                                    <span class="streak-pct pct-g" id="big-pct">60%</span>
+                                </div>
+                                <div class="streak-item">
+                                    <div class="streak-dot sdot-r"></div>
+                                    <span class="streak-text">SML</span>
+                                    <span class="streak-pct pct-r" id="sml-pct">40%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-card-title">
+                            <img src="accur.png" class="stat-icon" onerror="this.outerHTML='🎯'"> ACCURACY
+                        </div>
+                        <div class="accuracy-val">87.6%</div>
+                        <div class="mini-graph">
+                            <svg viewBox="0 0 100 28" preserveAspectRatio="none">
+                                <defs>
+                                    <linearGradient id="gfill" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stop-color="#00d4ff" stop-opacity="0.3"/>
+                                        <stop offset="100%" stop-color="#00d4ff" stop-opacity="0"/>
+                                    </linearGradient>
+                                    <filter id="glow">
+                                        <feGaussianBlur stdDeviation="1.5" result="blur"/>
+                                        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                                    </filter>
+                                </defs>
+                                <path d="M0,22 L12,18 L25,20 L35,14 L48,16 L60,10 L72,12 L83,6 L95,4 L100,2" fill="none" stroke="#00d4ff" stroke-width="1.5" filter="url(#glow)" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M0,22 L12,18 L25,20 L35,14 L48,16 L60,10 L72,12 L83,6 L95,4 L100,2 L100,28 L0,28 Z" fill="url(#gfill)"/>
+                                <circle cx="100" cy="2" r="2.5" fill="#00d4ff" filter="url(#glow)"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-card-title">🧠 AI CONF.</div>
+                        <div style="display:flex; flex-direction:column; gap:3px;">
+                            <div style="display:flex; gap:2px;" id="conf-bars">
+                                <div style="height:6px; flex:1; background:#9b59ff; border-radius:2px; box-shadow:0 0 4px #9b59ff;"></div>
+                                <div style="height:6px; flex:1; background:#9b59ff; border-radius:2px; box-shadow:0 0 4px #9b59ff;"></div>
+                                <div style="height:6px; flex:1; background:#9b59ff; border-radius:2px; box-shadow:0 0 4px #9b59ff;"></div>
+                                <div style="height:6px; flex:1; background:#9b59ff; border-radius:2px; box-shadow:0 0 4px #9b59ff;"></div>
+                                <div style="height:6px; flex:1; background:#9b59ff; border-radius:2px; box-shadow:0 0 4px #9b59ff;"></div>
+                                <div style="height:6px; flex:1; background:#9b59ff; border-radius:2px; box-shadow:0 0 4px #9b59ff;"></div>
+                                <div style="height:6px; flex:1; background:#9b59ff; border-radius:2px; box-shadow:0 0 4px #9b59ff;"></div>
+                                <div style="height:6px; flex:0.5; background:rgba(155,89,255,0.2); border-radius:2px;"></div>
+                            </div>
+                            <div style="font-family:'Orbitron',sans-serif; font-size:14px; font-weight:900; color:#9b59ff; text-shadow:0 0 8px rgba(155,89,255,0.6);">94%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Insights -->
+            <div class="insights-section">
+                <div class="insights-title"><i class="fas fa-sparkles"></i> ✦ AI INSIGHTS</div>
+                <div class="insights-grid">
+                    <div class="insight-box">
+                        <img src="trend.png" class="insight-icon" onerror="this.outerHTML='📈'">
+                        <div class="insight-label">TREND</div>
+                        <div class="insight-val ival-big" id="insight-trend">BIG</div>
+                    </div>
+                    <div class="insight-box">
+                        <img src="suggestion.png" class="insight-icon" onerror="this.outerHTML='🎯'">
+                        <div class="insight-label">SUGGEST</div>
+                        <div class="insight-val ival-big" id="insight-suggest">BIG</div>
+                    </div>
+                    <div class="insight-box">
+                        <img src="risk.png" class="insight-icon" onerror="this.outerHTML='🛡️'">
+                        <div class="insight-label">RISK</div>
+                        <div class="insight-val ival-low" id="insight-risk">LOW</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Status Bar -->
+            <div class="status-bar">
+                <div class="status-left">
+                    <div class="ai-badge">AI</div>
+                    <span class="status-text">PREDICTION ENGINE v2.4</span>
+                </div>
+                <div class="live-dot">
+                    <div class="live-indicator"></div>
+                    <span class="live-text">SERVER: LIVE</span>
+                </div>
+                <span class="status-text">LAST UPDATE: Just now</span>
+            </div>
+
+        </div>
+        <!-- END #prediction-content -->
+
+    </div>
+    <!-- END PANEL -->
+
+    <!-- Payment Box (kept for reference, not used in main flow) -->
+    <div id="payment-box">
+        <h3 style="color: gold; font-family:'Orbitron',sans-serif;">ACTIVATE PREMIUM</h3>
+        <img src="qr.png" alt="Scan QR" class="qr-img">
+        <p style="font-family:'Rajdhani',sans-serif;">Activation Fee: ₹199</p>
+        <input type="text" id="utr" style="width:100%; padding:10px; margin:10px 0; background:#000; color:#fff; border:1px solid #444; font-family:'Orbitron',sans-serif;" placeholder="Enter Ref/UTR No.">
+        <button class="main-btn" style="width:100%; margin:0;" onclick="fakeProcess()">VERIFY PAYMENT</button>
+        <div id="loading-overlay" class="loading-overlay">
+            <i class="fas fa-sync fa-spin" style="font-size: 40px; color: gold;"></i>
+            <p style="margin-top: 10px; font-family:'Orbitron',sans-serif;">Verifying...</p>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = "https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json";
+        let uidVerified = false;
+        let historyData = [];
+        let timerInterval;
+        let timerSeconds = 45;
+        let currentNextPeriodId = null;
+        let currentPrediction = null; // { periodId, number, color, size }
+
+        // ===== SIMPLE HASH FUNCTION (deterministic prediction per period) =====
+        function simpleHash(str) {
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                hash = ((hash << 5) - hash) + str.charCodeAt(i);
+                hash |= 0;
+            }
+            return Math.abs(hash);
+        }
+
+        // ===== GET PREDICTION FOR PERIOD (deterministic - same period = same prediction) =====
+        function getPredictionForPeriod(periodId) {
+            const hash = simpleHash(periodId);
+            const colorIndex = hash % 2; // 0 = GREEN, 1 = RED
+            const sizeIndex = Math.floor(hash / 2) % 2; // 0 = BIG, 1 = SMALL
+
+            const color = colorIndex === 0 ? "GREEN" : "RED";
+            const size = sizeIndex === 0 ? "BIG" : "SMALL";
+
+            let numOptions;
+            if (color === "GREEN" && size === "SMALL") numOptions = [1, 3];
+            else if (color === "GREEN" && size === "BIG") numOptions = [5, 7, 9];
+            else if (color === "RED" && size === "SMALL") numOptions = [0, 2, 4];
+            else numOptions = [6, 8]; // RED + BIG
+
+            const numIndex = Math.floor(hash / 4) % numOptions.length;
+            const number = numOptions[numIndex];
+
+            return { periodId, number, color, size };
+        }
+
+        // ===== TIMER =====
+        function startTimer() {
+            timerSeconds = Math.floor(Math.random() * 55) + 5;
+            updateTimerDisplay();
+            clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                timerSeconds--;
+                if (timerSeconds < 0) timerSeconds = 59;
+                updateTimerDisplay();
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const m = String(Math.floor(timerSeconds / 60)).padStart(2, '0');
+            const s = String(timerSeconds % 60).padStart(2, '0');
+            document.getElementById('timer-display').textContent = `${m}:${s}`;
+        }
+
+        // ===== FETCH LIVE PERIOD + HISTORY =====
+        async function fetchLivePeriod() {
+            try {
+                const response = await fetch(`${API_URL}?t=${new Date().getTime()}`);
+                const data = await response.json();
+                if (data && data.data && data.data.list && data.data.list.length > 0) {
+                    const list = data.data.list;
+                    const latestIssue = list[0].issueNumber;
+                    const nextPeriod = (BigInt(latestIssue) + 1n).toString();
+                    document.getElementById('game-period-id').innerText = nextPeriod;
+
+                    // Check if period changed
+                    if (nextPeriod !== currentNextPeriodId) {
+                        const previousPeriodId = currentNextPeriodId;
+                        currentNextPeriodId = nextPeriod;
+                        // Generate new prediction for the new period
+                        currentPrediction = getPredictionForPeriod(nextPeriod);
+                        // If panel is open and UID verified, display it
+                        if (uidVerified && document.getElementById('mickey-panel').style.display === 'block') {
+                            displayPrediction(currentPrediction);
+                            startTimer();
+                        }
+                        console.log(`Period changed: ${previousPeriodId} → ${nextPeriod}, new prediction:`, currentPrediction);
+                    }
+
+                    // Build history
+                    historyData = list.slice(0, 8).map(item => ({
+                        period: item.issueNumber,
+                        number: item.number,
+                        color: item.colour || (parseInt(item.number) % 2 === 0 ? 'red' : 'green'),
+                        size: parseInt(item.number) >= 5 ? 'Big' : 'Small'
+                    }));
+                    renderHistory();
+                    updateStreakStats();
+                }
+            } catch (e) {
+                console.error("API Error:", e);
+            }
+        }
+
+        function renderHistory() {
+            const list = document.getElementById('history-list');
+            if (historyData.length === 0) return;
+            list.innerHTML = '';
+            historyData.forEach(item => {
+                const num = parseInt(item.number);
+                let numClass = num % 2 !== 0 ? 'num-green' : 'num-red';
+                if (num === 0 || num === 5) numClass = 'num-purple';
+                const isSmall = num < 5;
+                const row = document.createElement('div');
+                row.className = 'history-row';
+                const shortPeriod = String(item.period).slice(-6);
+                row.innerHTML = `
+                    <span class="hist-period">${shortPeriod}</span>
+                    <span class="hist-num-badge ${numClass}">${item.number}</span>
+                    <span class="hist-result ${isSmall ? 'result-small' : 'result-big'}">${item.size}</span>
+                    <span class="hist-dot ${isSmall ? 'dot-red' : 'dot-green'}"></span>
+                `;
+                list.appendChild(row);
+            });
+        }
+
+        function updateStreakStats() {
+            if (historyData.length === 0) return;
+            const bigCount = historyData.filter(d => parseInt(d.number) >= 5).length;
+            const smallCount = historyData.length - bigCount;
+            const bigPct = Math.round((bigCount / historyData.length) * 100);
+            const smlPct = 100 - bigPct;
+            document.getElementById('big-pct').textContent = bigPct + '%';
+            document.getElementById('sml-pct').textContent = smlPct + '%';
+
+            const offset = 88 - (88 * bigPct / 100);
+            document.getElementById('streak-arc').style.strokeDashoffset = offset;
+        }
+
+        // ===== DISPLAY PREDICTION IN UI =====
+        function displayPrediction(prediction) {
+            if (!prediction) return;
+
+            const orb = document.getElementById('number-orb');
+            const orbNum = document.getElementById('pred-number');
+            const predSize = document.getElementById('pred-size');
+            const predBadge = document.getElementById('pred-color-badge');
+            const orbRing = document.getElementById('orb-ring');
+            const orbRing2 = document.getElementById('orb-ring2');
+
+            // Brief "loading" flash
+            orbNum.textContent = '?';
+            predSize.textContent = '...';
+            predBadge.textContent = '...';
+
+            setTimeout(() => {
+                orbNum.textContent = prediction.number;
+
+                if (prediction.color === "GREEN") {
+                    orb.className = 'number-orb green-orb';
+                    orbRing.className = 'orb-ring';
+                    orbRing2.className = 'orb-ring2';
+                    orbNum.className = 'orb-number';
+                    predSize.className = 'pred-size';
+                    predBadge.className = 'pred-color-badge';
+                } else {
+                    orb.className = 'number-orb red-orb';
+                    orbRing.className = 'orb-ring red-ring';
+                    orbRing2.className = 'orb-ring2';
+                    orbNum.className = 'orb-number red-num';
+                    predSize.className = 'pred-size red-size';
+                    predBadge.className = 'pred-color-badge red-badge';
+                }
+
+                predSize.textContent = prediction.size;
+                predBadge.textContent = prediction.color;
+
+                // Update AI Insights
+                document.getElementById('insight-trend').textContent = prediction.size;
+                document.getElementById('insight-suggest').textContent = prediction.size;
+                document.getElementById('insight-risk').textContent = Math.random() > 0.5 ? 'LOW' : 'MED';
+            }, 400);
+        }
+
+        // ===== UID VERIFICATION =====
+        function verifyUID() {
+            const uidInput = document.getElementById('uid-input');
+            const enteredUID = uidInput.value.trim();
+            const errorMsg = document.getElementById('uid-error-msg');
+            const registerWrap = document.getElementById('register-btn-wrap');
+
+            if (enteredUID === "456789") {
+                // CORRECT UID - ACTIVATE
+                uidVerified = true;
+                errorMsg.style.display = 'none';
+                registerWrap.style.display = 'none';
+                document.getElementById('uid-section').style.display = 'none';
+                document.getElementById('prediction-content').style.display = 'block';
+
+                // Fetch latest data and generate prediction
+                fetchLivePeriod().then(() => {
+                    if (currentPrediction && currentPrediction.periodId === currentNextPeriodId) {
+                        displayPrediction(currentPrediction);
+                    } else if (currentNextPeriodId) {
+                        currentPrediction = getPredictionForPeriod(currentNextPeriodId);
+                        displayPrediction(currentPrediction);
+                    }
+                    if (!timerInterval || timerSeconds <= 0) {
+                        startTimer();
+                    }
+                });
+
+                console.log('✅ UID Verified: 456789 - Hack Activated');
+            } else {
+                // WRONG UID - SHOW ERROR + REGISTER BUTTON
+                errorMsg.style.display = 'block';
+                registerWrap.style.display = 'block';
+                uidInput.style.borderColor = '#ff4d6d';
+                uidInput.style.boxShadow = '0 0 12px rgba(255,77,109,0.5), inset 0 0 10px rgba(0,0,0,0.5)';
+
+                // Reset input border after a moment
+                setTimeout(() => {
+                    uidInput.style.borderColor = 'rgba(140, 70, 255, 0.5)';
+                    uidInput.style.boxShadow = 'inset 0 0 10px rgba(0,0,0,0.5)';
+                }, 1500);
+
+                // Shake the error message
+                errorMsg.style.animation = 'none';
+                errorMsg.offsetHeight;
+                errorMsg.style.animation = 'shakeError 0.5s ease';
+
+                console.log('❌ Invalid UID entered:', enteredUID);
+            }
+        }
+
+        // Allow Enter key to trigger verify
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('uid-input').addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    verifyUID();
+                }
+            });
+        });
+
+        // ===== DRAG LOGIC FOR FLOATING CIRCLE =====
+        const floatBtn = document.getElementById('floating-circle');
+        let isDragging = false,
+            xOffset = 0,
+            yOffset = 0,
+            initialX, initialY;
+
+        floatBtn.addEventListener("touchstart", (e) => {
+            initialX = e.touches[0].clientX - xOffset;
+            initialY = e.touches[0].clientY - yOffset;
+            isDragging = false;
+        });
+        floatBtn.addEventListener("touchmove", (e) => {
+            isDragging = true;
+            e.preventDefault();
+            const currentX = e.touches[0].clientX - initialX;
+            const currentY = e.touches[0].clientY - initialY;
+            xOffset = currentX;
+            yOffset = currentY;
+            floatBtn.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
+        }, { passive: false });
+        floatBtn.addEventListener("click", () => {
+            if (!isDragging) toggleMickeyPanel();
+        });
+
+        // ===== START APP =====
+        function startApp() {
+            document.getElementById('game-frame').src = "https://13lwin17.com/register?inviteCode=87R5KDN&from=web";
+            document.getElementById('entry-screen').style.display = 'none';
+            document.getElementById('game-frame').style.display = 'block';
+            document.getElementById('floating-circle').style.display = 'flex';
+
+            // Start background data fetching
+            fetchLivePeriod();
+            setInterval(fetchLivePeriod, 5000);
+            startTimer();
+        }
+
+        // ===== TOGGLE PANEL =====
+        function toggleMickeyPanel() {
+            const p = document.getElementById('mickey-panel');
+
+            if (p.style.display === 'block') {
+                // CLOSE PANEL
+                p.style.display = 'none';
+            } else {
+                // OPEN PANEL
+                p.style.display = 'block';
+
+                if (uidVerified) {
+                    // Already verified - show prediction content
+                    document.getElementById('uid-section').style.display = 'none';
+                    document.getElementById('prediction-content').style.display = 'block';
+
+                    // Show cached prediction for current period (or generate if needed)
+                    if (currentPrediction && currentPrediction.periodId === currentNextPeriodId) {
+                        displayPrediction(currentPrediction);
+                    } else if (currentNextPeriodId) {
+                        currentPrediction = getPredictionForPeriod(currentNextPeriodId);
+                        displayPrediction(currentPrediction);
+                    }
+                    fetchLivePeriod();
+                } else {
+                    // Not verified - show UID input section
+                    document.getElementById('uid-section').style.display = 'block';
+                    document.getElementById('prediction-content').style.display = 'none';
+                    document.getElementById('uid-error-msg').style.display = 'none';
+                    document.getElementById('register-btn-wrap').style.display = 'none';
+                    document.getElementById('uid-input').value = '';
+                    document.getElementById('uid-input').style.borderColor = 'rgba(140, 70, 255, 0.5)';
+                    document.getElementById('uid-input').style.boxShadow = 'inset 0 0 10px rgba(0,0,0,0.5)';
+                    fetchLivePeriod();
+                }
+            }
+        }
+
+        // ===== PAYMENT FUNCTIONS (kept for compatibility) =====
+        function openPayment() {
+            document.getElementById('payment-box').style.display = 'block';
+        }
+
+        function fakeProcess() {
+            if (document.getElementById('utr').value.length < 10) {
+                alert("Invalid UTR!");
+                return;
+            }
+            document.getElementById('loading-overlay').style.display = 'flex';
+            setTimeout(() => {
+                document.getElementById('loading-overlay').style.display = 'none';
+                document.getElementById('payment-box').style.display = 'none';
+                alert("Suresort Active!");
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
